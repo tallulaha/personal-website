@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<title>Mind and Body</title>
+		<link rel="StyleSheet" type="text/css" href="../index.css">
+    	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+   		<script src="index.js"></script>
+   		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<h1 id="titleName">Mind and Body</h1> 
+		 <div data-role="page" id="main">
+		 	<a rel="external" href="../index.html" style="color: turquoise">
+                <!-- <img src="img/icons/cook.png" style="width:50px"> -->
+                <br>
+                Home
+            </a>
+            <a rel="external" href="../pages/tech.html" style="color: turquoise">
+                <!-- <img src="img/icons/cook.png" style="width:50px"> -->
+                <br>
+                Tech
+            </a>
+		 	<a rel="external" href="../pages/art.html" style="color: turquoise">
+                <!-- <img src="img/icons/cook.png" style="width:50px"> -->
+                <br>
+                Art, Fashion, Design
+            </a>
+            <div id="clock"><span id="timer"></span>
+            <p><button type="button" id="time" value="Start Timer" onclick="beginTimer()">Start Timer</button></p></div>
+		 </div><!-- /page -->
+		 <script language="javascript">
+            document.getElementById('timer').innerHTML = 04 + ":" + "00";
+            function beginTimer() {
+                $('#time').html('Pause Timer');
+                $('#time').attr('onclick', "pauseTimer()");
+                var presentTime = document.getElementById('timer').innerHTML;
+                var timeArray = presentTime.split(/[:]+/);
+                var m = timeArray[0];
+                var s = checkSecond((timeArray[1] - 1));
+                if(s==59){m=m-1}
+                //if(m<0){alert('timer completed')}
+
+                document.getElementById('timer').innerHTML = m + ":" + s;
+                t = setTimeout(beginTimer, 1000);
+                if (s==0) {
+                    if (m == 0) {
+                        clearTimeout(t);
+                        document.getElementById('timer').innerHTML = 04 + ":" + "00";
+                        $('#time').attr('onclick', "beginTimer()");
+                        $('#time').html('Restart Timer');
+                    }
+                }
+            }
+
+            function checkSecond(sec) {
+                if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+                if (sec < 0) {sec = "59"};
+                return sec;
+            }
+
+
+            function pauseTimer() {
+                $('#time').attr('onclick', "beginTimer()");
+                $('#time').html('Continue Timer'); 
+                clearTimeout(t);
+            //     $('#inMyRecipes').html('Saved in My Recipes');
+            //     $('#myrecipeButton').attr('onclick', "removeRecipe()");
+            //     $('#myrecipeButton').html('Remove From My Recipes'); 
+            }
+        </script>
+	</body>
+</html>

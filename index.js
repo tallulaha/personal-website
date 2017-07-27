@@ -17,7 +17,7 @@ var textPosts = [
 	{
 		"title": "Hello",
 		"text": "Text Post #3",
-		"page":"food"
+		"page":"mb"
 	}
 ]
 
